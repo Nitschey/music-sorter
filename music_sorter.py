@@ -19,22 +19,22 @@ def sort_song(song: Path, bands: set) -> bool:
     return was_sorted
 
 def main() -> None:
-    user_input = input("path to the music folder (empty takes parent): ")
+    user_input = input("[input] path to the music folder (empty takes parent): ")
     if not user_input:
         music_dir = Path(__file__).resolve().parent
     else:
         try:
             music_dir = Path(user_input).resolve()
         except:
-            print("that path doesn't exist or you dont have permissions for it :(")
-            raise SystemExit("execute me again with a valid path pls")
+            print("[error] that path doesn't exist or you dont have permissions for it :(")
+            raise SystemExit("[error] execute me again with a valid path pls")
     bands = create_bands_set(music_dir)
-    print(f"found {len(bands)} band folders!")
-    print("now getting to sorting...")
+    print(f"[searching] found {len(bands)} band folders!")
+    print("[sorting] now getting to sorting...")
     counter = 0
     for song in music_dir.glob("*.opus"):
         counter += sort_song(song, bands)
-    print(f"sorted {counter} songs!")
+    print(f"[finished] sorted {counter} songs, done")
 
 if __name__ == "__main__":
     main()
