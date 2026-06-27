@@ -4,7 +4,7 @@ from pathlib import Path
 from shutil import move
 
 # list of fluff that can appear in YT videos
-FLUFF_LIST = ["hd", "official", "video", "visual", "(", ")", "[", "]" "@"]
+FLUFF_LIST = ["hd", "official", "music", "content", "video", "visual", "4k", "(", ")", "[", "]" "@"]
 
 def create_bands_set(path: Path) -> set:
     bands = set()
@@ -14,11 +14,13 @@ def create_bands_set(path: Path) -> set:
     
 def sort_song(song: Path, bands: set) -> bool:
     was_sorted = False
-    song = song.parent / clean_song_title(song.name)
     for band in bands:
-        if band.name.lower() in song.name.lower(): 
-            move(str(song), str(band) + "/" + str(song.name))
+        # need to replace underscores to match with band folder names
+        if band.name.lower() in song.name.lower().replace("_", "-"): 
+            # move to band folder with cleaned song title for file name
+            move(str(song), str(band) + "/" + clean_song_title(song.name))
             was_sorted = True
+            print(f"[sorting] sorted {song.name} into {band.name}")
     return was_sorted
 
 def clean_song_title(song: str) -> str:
@@ -31,8 +33,11 @@ def clean_song_title(song: str) -> str:
     for pair in replace_pairs:
         removed_spaces = removed_spaces.lower().replace(*pair)
     # everything back as a title with underscores
-    removed_fluff = "_".join(removed_spaces.split()).title()
-    cleaned_title = removed_fluff.strip("_")
+    removed_fluff = "_".join(removed_spaces.split())
+    # remove trailing underscores left over from fluff removal
+    stripped_underscores = removed_fluff.split(".")
+    stripped_underscores[0] = stripped_underscores[0].strip("_").title()
+    cleaned_title = ".".join(stripped_underscores)
     return cleaned_title
 
 def main() -> None:
