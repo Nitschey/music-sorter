@@ -54,5 +54,4 @@ def main() -> None:
     print(f"[finished] sorted {counter} songs, done")
 
 if __name__ == "__main__":
-    # main()
-    print(clean_song_title("Kid_Kapichi_ft._Bob_Vylan_-_New_England_(Official_Video)"))
+    main()
