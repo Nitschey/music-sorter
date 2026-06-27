@@ -1,30 +1,40 @@
 #!/usr/bin/env python3
 
-import shutil
 from pathlib import Path
+from shutil import move
 
-def create_dir_set(path: Path) -> set:
-    dirs = set()
-    for directory in path.glob("*/"):
-        dirs.add(directory)
-    return dirs
-
-def sort_into_dir(song: str) -> None:
-    pass
-
-def compare_with_dirs(file: str, dirs: set) -> bool:
-    was_sorted = False
-    song = file.replace("_", "-")
-    for band in dirs:
-        if band in song:
-            sort_into_dir(song)
-            was_sorted = True
+def create_bands_set(path: Path) -> set:
+    bands = set()
+    for band_directory in path.glob("*/"):
+        bands.add(band_directory)
+    return bands
     
+def sort_song(song: Path, bands: set) -> bool:
+    was_sorted = False
+    song_normalised = song.name.replace("_", "-").lower()
+    for band in bands:
+        if band.name.lower() in song_normalised: 
+            move(str(song), str(band) + "/" + str(song.name))
+            was_sorted = True
     return was_sorted
 
-def main():
-    for item in create_dir_set(Path("C:/Users/niklas.nitsch/Documents/Teaching").resolve()):
-        print(item)
+def main() -> None:
+    user_input = input("path to the music folder (empty takes parent): ")
+    if not user_input:
+        music_dir = Path(__file__).resolve().parent
+    else:
+        try:
+            music_dir = Path(user_input).resolve()
+        except:
+            print("that path doesn't exist or you dont have permissions for it :(")
+            raise SystemExit("execute me again with a valid path pls")
+    bands = create_bands_set(music_dir)
+    print(f"found {len(bands)} band folders!")
+    print("now getting to sorting...")
+    counter = 0
+    for song in music_dir.glob("*.opus"):
+        counter += sort_song(song, bands)
+    print(f"sorted {counter} songs!")
 
-if __name__ == "main":
+if __name__ == "__main__":
     main()
