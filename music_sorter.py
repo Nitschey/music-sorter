@@ -4,14 +4,15 @@ from pathlib import Path
 from shutil import move
 
 # list of fluff that can appear in YT videos
-FLUFF_LIST = ["hd", "official", "music", "content", "video", "visual", "4k", "(", ")", "[", "]" "@"]
+FLUFF_LIST = ["hd", "official", "music", "content", "video", "visual", "visualizer", "visualiser", "4k", "lyric", "lyrics" "(", ")", "[", "]" "@"]
 
-def create_bands_set(path: Path) -> set:
+def create_bands_set(music_dir: Path) -> set:
     bands = set()
-    for band_directory in path.glob("*/"):
+    # add all folders in music directory to set
+    for band_directory in music_dir.glob("*/"):
         bands.add(band_directory)
     return bands
-    
+
 def sort_song(song: Path, bands: set) -> bool:
     was_sorted = False
     for band in bands:
@@ -26,7 +27,7 @@ def sort_song(song: Path, bands: set) -> bool:
 def clean_song_title(song: str) -> str:
     # remove spaces around dash separator
     removed_spaces = song.replace("_-_", "-")
-    # create list of pairs of replacements
+    # create list of pairs of replacements (replace fluff with nothing)
     replace_pairs = [(fluff, "") for fluff in FLUFF_LIST]
     # remove extra underscores around dash separator
     replace_pairs.append(("_-_", "-"))
