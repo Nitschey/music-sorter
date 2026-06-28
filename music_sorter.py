@@ -3,7 +3,7 @@
 from pathlib import Path
 from shutil import move
 
-# list of fluff that can appear in YT videos
+# list of fluff that can appear in YT music videos
 FLUFF_LIST = ["hd", "official", "music", "content", "video", "visual", "visualizer", "visualiser", "4k", "lyric", "lyrics" "(", ")", "[", "]" "@"]
 
 def create_bands_set(music_dir: Path) -> set:
@@ -19,9 +19,12 @@ def sort_song(song: Path, bands: set) -> bool:
         # need to replace underscores to match with band folder names
         if band.name.lower() in song.name.lower().replace("_", "-"): 
             # move to band folder with cleaned song title for file name
-            move(str(song), str(band) + "/" + clean_song_title(song.name))
-            was_sorted = True
-            print(f"[sorting] sorted {song.name} into {band.name}")
+            try:
+                move(str(song), str(band) + "/" + clean_song_title(song.name))
+                was_sorted = True
+                print(f"[sorting] sorted {song.name} into {band.name}")
+            except:
+                print(f"[warning] couldn't sort {song.name}")
     return was_sorted
 
 def clean_song_title(song: str) -> str:
@@ -54,10 +57,16 @@ def main() -> None:
     bands = create_bands_set(music_dir)
     print(f"[searching] found {len(bands)} band folders!")
     print("[sorting] now getting to sorting...")
-    counter = 0
+    sorted_counter = 0
+    failed_counter = 0
     for song in music_dir.glob("*.opus"):
-        counter += sort_song(song, bands)
-    print(f"[finished] sorted {counter} songs, done")
+        if sort_song(song, bands) == True:
+            sorted_counter += 1
+        else:
+            failed_counter += 1
+    if failed_counter > 0:
+        print(f"[warning] failed sorting {failed_counter} songs, check manually")
+    print(f"[finished] sorted {sorted_counter} songs, done")
 
 if __name__ == "__main__":
     main()
