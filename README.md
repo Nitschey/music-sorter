@@ -2,6 +2,11 @@
 a very simple & minimalistic python music sorter for music downloaded from youtube via yt-dlp  
 I use it for my small home file server, so it's tailored to that case - it's not trying to be a "fit-all" solution
 
+### **why?**
+I like to keep my music sorted by artist, so I have band/artist folders with songs inside
+when I download stuff for my collection using yt-dlp, I don't have reliable meta-data and co
+I don't wanna sort everything manually into all my band folders, so I made this
+
 ### **usage**
 1. create folders with band names, it doesn't do that automatically (yet?)
 2. put music files in the same folder as your collection (on the same level as the band folders)
