@@ -1,8 +1,6 @@
-
 ### **overview**
-a very simple python music sorter for music downloaded from youtube  
-I use it for my small home file server, so it's tailored to that case   
-it's not trying to be a "fit-all" solution
+a very simple & minimalistic python music sorter for music downloaded from youtube via yt-dlp  
+I use it for my small home file server, so it's tailored to that case - it's not trying to be a "fit-all" solution
 
 ### **usage**
 1. create folders with band names, it doesn't do that automatically (yet?)
@@ -10,7 +8,11 @@ it's not trying to be a "fit-all" solution
 
 or just put in the same folder with all the band folders for convenience (don't need a path then)
 
-### **my yt-dlp config**
+### **known issues/quirks**
+- when there's multiple band names, it just adds it to the folder of the first that appears in the file name (should generally be fine like this)
+- it doesn't create missing band folders (I have no idea how to approach this yet, would require some api call for matching band name probably)
+
+### **my yt-dlp config for music**
 ```config
 # always extract audio
 -x
