@@ -4,7 +4,8 @@ I use it for my small home file server, so it's tailored to that case - it's not
 
 ### **usage**
 1. create folders with band names, it doesn't do that automatically (yet?)
-2. just run and provide path to your music collection
+2. put music files in the same folder as your collection (on the same level as the band folders)
+3. just run and provide path to your music collection
 
 or just put in the same folder with all the band folders for convenience (don't need a path then)
 
