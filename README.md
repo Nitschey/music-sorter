@@ -8,7 +8,7 @@ when I download stuff for my collection using yt-dlp, I don't have reliable meta
 I don't wanna sort everything manually into all my band folders, so I made this  
 
 ### **usage**
-1. create folders with band names, it doesn't do that automatically (yet?)
+1. create folders with band names like ```My-Band-Folder``` (the dashes are required, we don't do spaces here)
 2. put music files in the same folder as your collection (on the same level as the band folders)
 3. just run and provide path to your music collection
 
