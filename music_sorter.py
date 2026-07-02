@@ -62,7 +62,6 @@ def main() -> None:
             print("[error] that path doesn't exist or you don't have permissions for it :(")
             raise SystemExit("[error] execute me again with a valid path pls")
     bands = create_bands_set(music_dir)
-    print(bands)
     print(f"[searching] found {len(bands)} band folders!")
     print("[sorting] now getting to sorting...")
     sorted_counter = 0
