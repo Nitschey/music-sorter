@@ -6,7 +6,7 @@ from shutil import move
 # list of fluff that can appear in YT music videos -> just removed
 # not exhaustive, some arcane title constructions will still need manual editing
 FLUFF_LIST = ["hd", "official", "music", "content", "video", "visual", "visualizer", "visualiser", 
-            "4k", "upgrade", "lyric", "lyrics" "(", ")", "[", "]" "@"]
+            "4k", "upgrade", "hq", "lyric", "lyrics" "(", ")", "[", "]" "@"]
 # structural & grammar constructions that get created by yt-dlp normalising file names -> changed/cleaned
 STRUCTURES_LIST = [("_-_", "-"), ("_s_", "s_"), ("_re_", "re_"), ("_d_", "d_"), ("_&_", "_and_")]
 # formats to handle
