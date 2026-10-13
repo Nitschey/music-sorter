@@ -5,10 +5,38 @@ from shutil import move
 
 # list of fluff that can appear in YT music videos -> just removed
 # not exhaustive, some arcane title constructions will still need manual editing
-FLUFF_LIST = ["hd", "official", "music", "content", "video", "visual", "visualizer", "visualiser", 
-            "4k", "upgrade", "remaster", "hq", "lyric", "lyrics" "(", ")", "[", "]" "@"]
+FLUFF_LIST = [
+    "visualizer",
+    "visualiser",
+    "visual",
+    "lyrics",
+    "lyric",
+    "official",
+    "music",
+    "content",
+    "video",
+    "upgrade",
+    "remaster",
+    "hq",
+    "hd",
+    "4k",
+    "(", 
+    ")", 
+    "[", 
+    "]",
+    "@",
+    ]
+
 # structural & grammar constructions that get created by yt-dlp normalising file names -> changed/cleaned
-STRUCTURES_LIST = [("_-_", "-"), ("_s_", "s_"), ("_re_", "re_"), ("_d_", "d_"), ("_&_", "_and_")]
+STRUCTURES_LIST = [
+    ("_-_", "-"), 
+    ("_s_", "s_"), 
+    ("_re_", "re_"), 
+    ("_d_", "d_"), 
+    ("_&_", "_and_"),
+    ("&", "and"),
+    ]
+
 # formats to handle
 AUDIO_FORMATS = ("opus", "m4a", "mp3", "flac", "ogg", "wav", "webm")
 
